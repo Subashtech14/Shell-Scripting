@@ -16,3 +16,6 @@ pthread_join(thread2,NULL);
 return 0;
 }
 
+
+
+

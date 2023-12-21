@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+
+void *print_message_function( void *ptr );
+
+main()
+{
+	pthread_t t1, t2;
+	char *message1 = "Threads 1";
+	char *message2 = "Threads 2";
+	int Thread1, Thread2;
+
+	Thread1 = pthread_create( &t1, NULL, print_message_function, (void*) message1);
+	Thread2 = pthread_create( &t2, NULL, print_message_function, (void*) message2);
+
+	pthread_join( Thread1, NULL);
+	pthread_join( Thread2, NULL); 
+
+	printf("Thread 1 returns: %d\n",Thread1);
+	printf("Thread 2 returns: %d\n",Thread2);
+	exit(0);
+}
+
+void *print_message_function( void *ptr )
+{
+	char *message;
+	message = (char *) ptr;
+	printf("%s \n", message);
+}
